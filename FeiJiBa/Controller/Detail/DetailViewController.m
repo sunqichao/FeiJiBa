@@ -43,22 +43,26 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.isPro) {
-            self.titleLabel.text = self.dataModel.proTitle;
-            self.authorLabel.text = self.dataModel.proAuthor;
-            self.contentLabel.text = self.dataModel.proContent;
-        }else
-        {
-            self.titleLabel.text = self.dataModel.dsTitle;
-            self.authorLabel.text = self.dataModel.dsAuthor;
-            self.contentLabel.text = self.dataModel.dsContent;
-        }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        [self.contentLabel sizeToFit];
-        self.mainScrollView.contentSize = CGSizeMake(0, self.contentLabel.frame.origin.y+self.contentLabel.frame.size.height+50);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.isPro) {
+                self.titleLabel.text = self.dataModel.proTitle;
+                self.authorLabel.text = self.dataModel.proAuthor;
+                self.contentLabel.text = self.dataModel.proContent;
+            }else
+            {
+                self.titleLabel.text = self.dataModel.dsTitle;
+                self.authorLabel.text = self.dataModel.dsAuthor;
+                self.contentLabel.text = self.dataModel.dsContent;
+            }
+            
+            [self.contentLabel sizeToFit];
+            self.mainScrollView.contentSize = CGSizeMake(0, self.contentLabel.frame.origin.y+self.contentLabel.frame.size.height+50);
+        });
+        
     });
+    
     
 }
 

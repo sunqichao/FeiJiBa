@@ -10,6 +10,8 @@
 
 @interface MyInfoViewController ()
 
+@property (weak, nonatomic) IBOutlet UITableView *setttingTable;
+
 @end
 
 @implementation MyInfoViewController
