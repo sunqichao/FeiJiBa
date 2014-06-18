@@ -75,11 +75,18 @@
 
 - (void)share:(id)sender
 {
-    
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"507fcab25270157b37000010"
+                                      shareText:@"你要分享的文字"
+                                     shareImage:[UIImage imageNamed:@"icon.png"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToWechatTimeline,UMShareToWechatSession,nil]
+                                       delegate:nil];
 }
 
 - (void)next:(id)sender
 {
+    
+    
     
 }
 
